@@ -26,6 +26,7 @@ const (
 const (
 	a, b = iota + 1, iota + 2
 	c, d = iota * 2, iota * 3
+	e, f = iota, iota
 )
 
 func main() {
@@ -53,4 +54,6 @@ func main() {
 	fmt.Println("b = ", b)
 	fmt.Println("c = ", c)
 	fmt.Println("d = ", d)
+	fmt.Println("e = ", e)
+	fmt.Println("f = ", f)
 }

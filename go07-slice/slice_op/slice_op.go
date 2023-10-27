@@ -1,8 +1,8 @@
-package main
+package slice_op
 
 import "fmt"
 
-func main() {
+func SliceOpDemo() {
 	// 定义一个切片，长度为3，容量为5
 	var numbers = make([]int, 3, 5)
 	fmt.Printf("%v, len=%d, cap=%d\n", numbers, len(numbers), cap(numbers))

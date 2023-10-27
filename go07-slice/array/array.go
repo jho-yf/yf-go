@@ -1,8 +1,8 @@
-package main
+package array
 
 import "fmt"
 
-func main() {
+func ArrDemo() {
 
 	// 固定长度的数组，默认值为0
 	var arr1 [10]int

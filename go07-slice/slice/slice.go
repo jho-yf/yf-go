@@ -1,8 +1,8 @@
-package main
+package slice
 
 import "fmt"
 
-func main() {
+func SliceDemo() {
 	// 切片slice的声明方式
 	// 方式一：初始化并指定值
 	slice1 := []int{1, 2, 3}

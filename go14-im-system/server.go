@@ -109,6 +109,7 @@ func (server *Server) HandleMsg(user *User) {
 			}
 			server.mapLock.Unlock()
 		} else if len(msg) > 7 && msg[:7] == "rename|" {
+			// 消息格式：rename|zhangsan
 			newName := strings.Split(msg, "|")[1]
 			_, ok := server.OnlineUserMap[newName]
 			if ok {
@@ -119,7 +120,25 @@ func (server *Server) HandleMsg(user *User) {
 				user.Name = newName
 				server.OnlineUserMap[user.Name] = user
 				server.mapLock.Unlock()
-				server.SendMsg(user, "Rename '"+newName+"' success!")
+				server.SendMsg(user, "Rename '"+newName+"' success!\n")
+			}
+		} else if len(msg) > 4 && msg[:3] == "to|" {
+			// 消息格式：to|zhangsan|how are u
+			toName := strings.Split(msg, "|")[1]
+			if toName == "" {
+				server.SendMsg(user, "Error Message Format!")
+			}
+
+			toUser, ok := server.OnlineUserMap[toName]
+			if !ok {
+				server.SendMsg(user, "User '"+toName+"' not exist!")
+			} else {
+				content := strings.Split(msg, "|")[2]
+				if content == "" {
+					server.SendMsg(user, "Message is empty!")
+				} else {
+					server.SendMsg(toUser, "["+user.Addr+"]"+user.Name+" to you: "+content+"\n")
+				}
 			}
 		} else {
 			server.Broadcast(user, msg)
